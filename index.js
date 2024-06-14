@@ -41,6 +41,7 @@ app.get('*', (req, res) => {
 });
 
 // Start the server
+// (Every Render web service must bind to a port on host 0.0.0.0 to serve HTTP requests)
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Proxy server listening on port ${PORT}`);
 });
