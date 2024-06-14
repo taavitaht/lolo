@@ -46,6 +46,7 @@ module.exports = async (req, res) => {
         }
         const text = await response.text();
         res.setHeader('Content-Type', 'application/xml');
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.status(200).send(text);
     } catch (error) {
         console.error('Error fetching RSS feed:', error);
