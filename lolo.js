@@ -1,7 +1,7 @@
 function functionCall() { 
     //const newsFeedContents = 'lolo.xml'; 
     const newsFeedContents = 'https://flipboard.com/@raimoseero/feed-nii8kd0sz.rss';
-    fetch(newsFeedContents, { mode: 'no-cors' }) 
+    fetch(newsFeedContents) 
         .then(response => response.text()) 
   
         // DOMparser is the interface which parses  
