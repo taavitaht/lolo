@@ -2,6 +2,8 @@
 
 const express = require('express');
 //const fetch = require('node-fetch');
+const path = require('path');
+
 
 const app = express();
 const PORT = 3000;
@@ -28,6 +30,14 @@ app.get('/fetch-rss', async (req, res) => {
         console.error('Error fetching RSS feed:', error);
         res.status(500).send('Error fetching RSS feed');
     }
+});
+
+// Serve static files (css etc)
+app.use(express.static(path.join(__dirname, '/')));
+
+// Send index.html for any other request
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/', 'index.html'));
 });
 
 // Start the server
