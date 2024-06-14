@@ -4,7 +4,7 @@ const express = require('express');
 //const fetch = require('node-fetch');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 // Middleware to handle CORS
 app.use((req, res, next) => {
