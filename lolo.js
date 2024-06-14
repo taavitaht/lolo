@@ -1,52 +1,28 @@
-// Pass rss to html
+// Function to display RSS feed content in HTML
 async function displayRss(xml) {
-
-    // Divide xml into parts
     const items = xml.querySelectorAll("item");
-
     let htmlOutput = ``;
-
-    // Process each item from xml and add to output
     items.forEach(itemElement => {
-        htmlOutput += ` 
-                    <div> 
-                        <h3>                                                
-                            <a href= 
-                            "${itemElement.querySelector("link").innerHTML}" 
-                                   target="_blank" rel="noopener">                                 
-                                 ${itemElement.querySelector("title").innerHTML} 
-                                <button style= 
-                                "border-radius:8px; 
-                                background-color:rgb(32, 94, 170); 
-                                color:white;border:none"> 
-                                     RSS 
-                                </button> 
-                            </a>                             
-                        </h3> 
-                        <p> 
-                           ${itemElement
-                .querySelector("description").innerHTML} 
-                        <p>                         
-                    </div> 
-                    `;
+        const title = itemElement.querySelector("title").textContent;
+        const link = itemElement.querySelector("link").textContent;
+        const description = itemElement.querySelector("description").textContent;
+        htmlOutput += `
+            <div class="rss-item">
+                <h2><a href="${link}" target="_blank">${title}</a></h2>
+                <p>${description}</p>
+            </div>
+        `;
     });
-
-    // Returns the htmlOutput string 
-    // in the HTML body element 
-    // Check whether your query returns null 
-    var input =
-        document.getElementById("RssContainer");
+    const input = document.getElementById("RssContainer");
     if (input) {
         input.innerHTML = htmlOutput;
     }
     document.body.style.backgroundColor = "rgb(203, 245, 245)";
 }
 
-
-// Get rss from local proxy server
+// Function to get RSS feed from the local proxy server
 async function fetchRss() {
-
-    const proxyUrl = 'https://lolo-qeie2lorr-taavis-projects-addc1346.vercel.app/api/fetch-rss'
+    const proxyUrl = 'http://localhost:3000/fetch-rss';
     try {
         const response = await fetch(proxyUrl);
         if (!response.ok) {
@@ -61,12 +37,12 @@ async function fetchRss() {
     }
 }
 
+// Immediately-invoked function to fetch and display RSS feed
 (async () => {
     const xml = await fetchRss();
     if (xml) {
-        console.log("fetchRss() got the rss feed")
-        // Do something with acquired data
-        displayRss(xml)
+        console.log("fetchRss() got the RSS feed");
+        displayRss(xml);
     } else {
         console.error('Failed to fetch RSS feed');
     }
