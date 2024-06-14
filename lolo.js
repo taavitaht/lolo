@@ -46,7 +46,7 @@ async function displayRss(xml) {
 // Get rss from local proxy server
 async function fetchRss() {
 
-    const proxyUrl = 'http://localhost:3000/fetch-rss'
+    const proxyUrl = 'https://lolo-qeie2lorr-taavis-projects-addc1346.vercel.app/api/fetch-rss'
     try {
         const response = await fetch(proxyUrl);
         if (!response.ok) {
