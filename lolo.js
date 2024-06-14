@@ -1,28 +1,14 @@
-function functionCall() { 
-    //const newsFeedContents = 'lolo.xml'; 
-    const newsFeedContents = 'https://flipboard.com/@raimoseero/feed-nii8kd0sz.rss';
-    fetch(newsFeedContents) 
-        .then(response => response.text()) 
-  
-        // DOMparser is the interface which parses  
-        // a string having XML  
-        // and return XML document 
-        .then(str => new window.DOMParser() 
-            .parseFromString(str, "text/xml")) 
-        .then(data => { 
-  
-            //Returns collection of child elements 
-            // of the matched selector. 
-            const items = data.querySelectorAll("item"); 
-  
-            let htmlOutput = ``; 
-            /* The concatenation of htmlOutput  
-               string is applied for each item  
-               element of array. querySelector  
-               fetches first element of the descendant */
-  
-            items.forEach(itemElement => { 
-                htmlOutput += ` 
+// Pass rss to html
+async function displayRss(xml) {
+
+    // Divide xml into parts
+    const items = xml.querySelectorAll("item");
+
+    let htmlOutput = ``;
+
+    // Process each item from xml and add to output
+    items.forEach(itemElement => {
+        htmlOutput += ` 
                     <div> 
                         <h3>                                                
                             <a href= 
@@ -38,21 +24,50 @@ function functionCall() {
                             </a>                             
                         </h3> 
                         <p> 
-                           ${itemElement 
-                        .querySelector("description").innerHTML} 
+                           ${itemElement
+                .querySelector("description").innerHTML} 
                         <p>                         
                     </div> 
-                    `; 
-            }); 
-  
-            // Returns the htmlOutput string 
-            // in the HTML body element 
-            // Check whether your query returns null 
-            var input =  
-                document.getElementById("RSSfeedID"); 
-            if (input) { 
-                input.innerHTML = htmlOutput; 
-            } 
-            document.body.style.backgroundColor = "rgb(203, 245, 245)"; 
-        }); 
+                    `;
+    });
+
+    // Returns the htmlOutput string 
+    // in the HTML body element 
+    // Check whether your query returns null 
+    var input =
+        document.getElementById("RssContainer");
+    if (input) {
+        input.innerHTML = htmlOutput;
+    }
+    document.body.style.backgroundColor = "rgb(203, 245, 245)";
 }
+
+
+// Get rss from local proxy server
+async function fetchRss() {
+
+    const proxyUrl = 'http://localhost:3000/fetch-rss'
+    try {
+        const response = await fetch(proxyUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const text = await response.text();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, "application/xml");
+        return xml;
+    } catch (error) {
+        console.error('Error fetching the RSS feed:', error);
+    }
+}
+
+(async () => {
+    const xml = await fetchRss();
+    if (xml) {
+        console.log("fetchRss() got the rss feed")
+        // Do something with acquired data
+        displayRss(xml)
+    } else {
+        console.error('Failed to fetch RSS feed');
+    }
+})();
