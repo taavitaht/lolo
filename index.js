@@ -6,7 +6,7 @@ const path = require('path');
 
 
 const app = express();
-const PORT = 3000;
+//const PORT = 3000;
 
 // Middleware to handle CORS
 app.use((req, res, next) => {
@@ -40,7 +40,9 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/', 'index.html'));
 });
 
+/*
 // Start the server
 app.listen(PORT, () => {
     console.log(`Proxy server listening on port ${PORT}`);
 });
+*/
