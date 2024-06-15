@@ -7,7 +7,7 @@ async function fetchRss(url) {
     if (!url) { url = 'https://flipboard.com/@raimoseero/feed-nii8kd0sz.rss'; }
 
     // Access through proxy
-    const proxyUrl = 'http://0.0.0.0:3000/proxy?url=' + encodeURIComponent(url);
+    const proxyUrl = '/proxy?url=' + encodeURIComponent(url);
     try {
         const response = await fetch(proxyUrl);
         if (!response.ok) {
