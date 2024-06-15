@@ -60,9 +60,20 @@ const modal = document.getElementById('modal');
 const openButton = document.querySelector('.open-button');
 const closeButton = document.querySelector('.close-button');
 
-openButton.addEventListener('click', () => {
-    modal.showModal();
-});
+// Define an async function to handle decluttering
+async function handleOpenButtonClick() {
+    try {
+        modal.showModal();
+        let article = await declutter('https://www.helpnetsecurity.com/2024/05/22/authelia-open-source-authentication-authorization-server/');
+        document.getElementById('modal-div').innerText = article.content;
+    } catch (error) {
+        console.error('Error fetching and displaying article:', error);
+        // Handle error, e.g., display an error message
+    }
+}
+
+// Attach event listener to openButton
+openButton.addEventListener('click', handleOpenButtonClick);
 
 closeButton.addEventListener('click', () => {
     modal.close();
@@ -73,3 +84,34 @@ window.onclick = function (event) {
         modal.close();
     }
 }
+
+
+
+// Before displaying the article, it must be freed from clutter using the Mercury API web parser
+async function declutter(url) {
+
+    if (!url) { url = 'https://www.theverge.com/tech'}  // Default url
+    const apiUrl = 'http://localhost:3000/webparser';   // Server proxy for webparser
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        //console.log('Response from server:', data);
+        return data;
+    } catch (error) {
+        console.error('Error sending POST request:', error);
+    }
+}
+// Call the function to send the POST request
+//declutter('https://www.theverge.com/tech');

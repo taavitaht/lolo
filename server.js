@@ -12,7 +12,7 @@ const PORT = 3000;
 app.use(express.static(path.join(__dirname, '/')));
 
 // Middleware to parse JSON bodies
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 /*
 // Middleware to handle CORS
@@ -40,16 +40,18 @@ app.get('/proxy', async (req, res) => {
     }
 });
 
-// Handle the POST request using proxy
-app.post('/proxy', async (req, res) => {
-    const url = req.body.url;
+// Proxy endpoint to forward POST requests
+app.post('/webparser', async (req, res) => {
+    const apiUrl = 'https://uptime-mercury-api.azurewebsites.net/webparser';
+    const { url } = req.body;
 
     try {
-        const response = await axios.post(url, {
+        const response = await axios.post(apiUrl, { url }, {
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
+        
         res.json(response.data);
     } catch (error) {
         console.error('Error sending POST request:', error.message);
