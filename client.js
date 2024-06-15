@@ -65,7 +65,7 @@ async function handleOpenButtonClick() {
     try {
         modal.showModal();
         let article = await declutter('https://www.helpnetsecurity.com/2024/05/22/authelia-open-source-authentication-authorization-server/');
-        document.getElementById('modal-div').innerText = article.content;
+        document.getElementById('modal-div').innerHTML = article.content;
     } catch (error) {
         console.error('Error fetching and displaying article:', error);
         // Handle error, e.g., display an error message
