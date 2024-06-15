@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, '/')));
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
-/*
+
 // Middleware to handle CORS
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
-*/
+
 
 // General proxy endpoint
 app.get('/proxy', async (req, res) => {

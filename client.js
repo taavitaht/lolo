@@ -91,7 +91,7 @@ window.onclick = function (event) {
 async function declutter(url) {
 
     if (!url) { url = 'https://www.theverge.com/tech'}  // Default url
-    const apiUrl = 'http://localhost:3000/webparser';   // Server proxy for webparser
+    const apiUrl = 'http://0.0.0.0:3000/webparser';   // Server proxy for webparser
 
     try {
         const response = await fetch(apiUrl, {
