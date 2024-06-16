@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <!-- Menu -->
     <div>
         <div class="headerbox">
             
@@ -22,68 +23,36 @@
             <div style="background-color:rgb(32, 94, 170); 
                         overflow:hidden; 
                         text-align: center;">
-                <ul style="text-align: center;">
-                    <li>
-                        <a class="aClass" href="https://www.geeksforgeeks.org/?ref=ghm" target="_self">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a class="aClass" href="https://www.geeksforgeeks.org/html/?ref=ghm">
-                            HTML Tutorial
-                        </a>
-                    </li>
-                    <li>
-                        <a class="aClass" href="https://www.geeksforgeeks.org/trending/?ref=shm">
-                            Latest News
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="aClass" href="https://www.geeksforgeeks.org/data-structures/?ref=shm">
-                            Data Structures
-                        </a>
-                    </li>
-                    <li>
-                        <a class="aClass" href="https://www.geeksforgeeks.org/fundamentals-of-algorithms/?ref=shm">
-                            Algorithms
-                        </a>
-                    </li>
-                </ul>
+                <button onclick="displayFeeds()">My RSS feeds</button>
             </div>
         </div>
     </div>
 
-
-
-
-
-    <button class="open-button">
-        Open modal 🙈
-    </button>
+    
 
     <!-- Modal -->
     <dialog id="modal" class="modal">
         
         <div id="modal-div">
+            Loading article...
         </div>
-        
-        <button class="close-button">Close modal</button>
         
     </dialog>
 
 
 
-
+    <!-- Main content area -->
     <div id="contentArea">
         <ul class="newsGrid" id="rssContainer">
             <!-- News headlines go here -->
         </ul>
     </div>
 
+
+    <!-- Scripts -->
     <script src="/client.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", fetchRss());
+        document.addEventListener("DOMContentLoaded", displayAllRss());
     </script>
 
 </body>
