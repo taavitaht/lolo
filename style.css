@@ -1,11 +1,14 @@
 h1,
 h3 {
+  font-family: GrotCondensed;
   text-align: center;
 }
 
 p {
+  font-family: GrotCondensed;
   font-size: 18px;
   padding: 0;
+  margin: auto;
 }
 
 
@@ -27,6 +30,8 @@ p {
 }
 
 .articlePreview {
+  font-family: GrotCondensed;
+  position: relative;
   padding: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -35,17 +40,43 @@ p {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.29);
 }
 
-.articlePreview:active {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.09);
-}
 
-.publishedOnBy {
+.pubDate {
   font-size: 12px;
   color: gray;
 }
 
+.source {
+  font-size: 12px;
+  color: gray;
+  position: absolute;
+  bottom: 5px;
+  margin: auto;
+}
+
 .clickable {
   cursor: pointer;
+}
+
+.category-container {
+  margin: 30px;
+}
+
+.category {
+  cursor: pointer;
+  display: inline;
+  color: darkgreen;
+  margin: 1px;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.category:hover {
+  background-color: azure;
+}
+
+.category:active {
+  color: lightgreen;
 }
 
 
@@ -61,4 +92,9 @@ dialog {
 
 dialog>p {
   text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }

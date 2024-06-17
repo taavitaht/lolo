@@ -11,32 +11,26 @@
 <body>
     <!-- Menu -->
     <div>
-        <div class="headerbox">
-            
-            <div style="text-align: center; 
-                        font-size: 30px; 
-                        padding: 10px;  
-                        font-weight: 700;">
-                RSS News feed Reader using HTML JavaScript CSS
-            </div>
-
-            <div style="background-color:rgb(32, 94, 170); 
-                        overflow:hidden; 
-                        text-align: center;">
-                <button onclick="displayFeeds()">My RSS feeds</button>
-            </div>
-        </div>
+        <h1 class ="clickable" onclick="refreshPage()">RSS News feed Reader using HTML JavaScript CSS</h1>
     </div>
 
-    
+    <div style="background-color:rgb(32, 94, 170); 
+                        overflow:hidden; 
+                        text-align: center;">
+        <button onclick="displayFeeds()">My RSS feeds</button>
+    </div>
+    </div>
+    </div>
+
+
 
     <!-- Modal -->
     <dialog id="modal" class="modal">
-        
-        <div id="modal-div">
+
+        <div id="modal-div" class="modal-div">
             Loading article...
         </div>
-        
+
     </dialog>
 
 
@@ -52,7 +46,7 @@
     <!-- Scripts -->
     <script src="/client.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", displayAllRss());
+        document.addEventListener("DOMContentLoaded", refreshPage());
     </script>
 
 </body>
